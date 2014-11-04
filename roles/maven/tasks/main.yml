@@ -1,0 +1,23 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+- name: Install Java 1.7
+  apt: name=openjdk-7-jdk state=present
+
+- name: Download Apache Maven
+  get_url: url=http://www.eu.apache.org/dist/maven/maven-3/3.2.3/binaries/apache-maven-3.2.3-bin.tar.gz dest=/opt/apache-maven-3.2.3.tar.gz
+
+- name: Create apache-maven directory
+  command: mkdir /opt/apache-maven creates=/opt/apache-maven
+
+- name: Remove current link
+  command: rm -rf /opt/apache-maven/current
+
+- name: Extract archive
+  command: /bin/tar xvf /opt/apache-maven-3.2.3.tar.gz -C /opt/apache-maven creates=/opt/apache-maven/apache-maven-3.2.3
+
+- name: Change ownership of Maven installation
+  file: path=/opt/apache-maven-3.2.3 owner=dev group=dev state=directory recurse=yes
+
+- name: Create symlink
+  command: chdir=/opt/apache-maven ln -s apache-maven-3.2.3 current
+  

@@ -1,0 +1,24 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+- name: Install Java 1.7
+  apt: name=openjdk-7-jdk state=present
+
+- name: Download Tomcat
+  get_url: url=http://www.eu.apache.org/dist/tomcat/tomcat-8/v{{version}}/bin/apache-tomcat-{{version}}.tar.gz dest=/opt/apache-tomcat-{{version}}.tar.gz
+
+- name: Create apache-tomcat directory
+  command: mkdir /opt/apache-tomcat creates=/opt/apache-tomcat
+
+- name: Remove current link
+  command: rm -rf /opt/apache-tomcat/current
+
+- name: Extract archive
+  command: /bin/tar xvf /opt/apache-tomcat-{{version}}.tar.gz -C /opt/apache-tomcat creates=/opt/apache-tomcat/apache-tomcat-{{version}}
+
+- name: Create symlink
+  command: chdir=/opt/apache-tomcat ln -s apache-tomcat-{{version}} current
+
+- name: Change ownership of Tomcat installation
+  file: path=/opt/apache-tomcat owner=dev group=dev state=directory recurse=yes
+
+  

@@ -1,0 +1,24 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+- name: Install Java 1.7
+  apt: name=openjdk-7-jdk state=present
+
+- name: Download Intellij
+  get_url: url=http://download-ln.jetbrains.com/idea/ideaIU-{{version}}.tar.gz dest=/opt/intellij-{{version}}.tar.gz
+
+- name: Create intellij directory
+  command: mkdir /opt/intellij creates=/opt/intellij
+
+- name: Remove current link
+  command: rm -rf /opt/intellij/current
+
+- name: Extract archive
+  command: /bin/tar xvf /opt/intellij-{{version}}.tar.gz -C /opt/intellij creates=/opt/intellij/idea-IU-{{build}}
+
+- name: Create symlink
+  command: chdir=/opt/intellij ln -s idea-IU-{{build}} current
+
+- name: Change ownership of Tomcat installation
+  file: path=/opt/intellij owner=dev group=dev state=directory recurse=yes
+
+  

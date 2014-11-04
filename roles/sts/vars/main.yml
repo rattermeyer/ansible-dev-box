@@ -1,0 +1,5 @@
+---
+# vars file for sts
+sts_version: 3.6.2
+eclipse_version: 4.4
+eclipse_full_version: 4.4.1

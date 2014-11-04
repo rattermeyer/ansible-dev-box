@@ -1,0 +1,9 @@
+---
+# tasks file for nvm
+# vim: noai:ts=2:sw=2:expandtab
+- name: Install nvm
+  shell: curl https://raw.githubusercontent.com/creationix/nvm/{{nvm_version}}/install.sh | bash
+  args:
+    creates: /home/dev/.nvm
+  sudo: yes
+  sudo_user: dev

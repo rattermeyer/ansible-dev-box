@@ -1,0 +1,13 @@
+# vim: noai:ts=4:sw=4:expandtab
+---
+# file dev
+- hosts: localhost
+  roles:
+    - {role: tomcat8, version: 8.0.14}
+    - maven
+    - intellij
+    - gvm
+    - devbox.chrome
+    - nvm
+    - sts
+

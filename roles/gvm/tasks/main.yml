@@ -1,0 +1,18 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+- name: Install Java 1.7
+  apt: name=openjdk-7-jdk state=present
+
+- name: Install curl
+  apt: name=curl state=present
+
+- name: Install gvm
+  shell: curl -s get.gvmtool.net | bash
+  args: 
+    chdir: /home/dev
+    creates: /home/dev/.gvm
+
+- name: Change ownership of gvm installation
+  file: path=/home/dev/.gvm owner=dev group=dev state=directory recurse=yes
+
+
