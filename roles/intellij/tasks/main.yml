@@ -18,7 +18,10 @@
 - name: Create symlink
   command: chdir=/opt/intellij ln -s idea-IU-{{build}} current
 
-- name: Change ownership of Tomcat installation
+- name: Change ownership of IntelliJ installation
   file: path=/opt/intellij owner=dev group=dev state=directory recurse=yes
+
+- name: Copy unity desktop file
+  template: src=intellij.j2 dest=/usr/share/applications/intellij.desktop
 
   

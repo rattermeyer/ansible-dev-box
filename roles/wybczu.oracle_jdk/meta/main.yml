@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  author: Lukasz Szczesny
+  description: Install Oracle JDK
+  license: license Apache
+  min_ansible_version: 1.7
+  platforms:
+  - name: Ubuntu
+    versions:
+    - all
+  - name: Debian
+    versions:
+    - all
+  categories:
+  - system
+  - development
+dependencies: []

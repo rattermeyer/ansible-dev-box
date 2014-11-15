@@ -1,0 +1,50 @@
+---
+
+language: python
+python: "2.7"
+
+env:
+
+  global:
+    - ANSIBLE_ROLES_PATH=../
+
+  matrix:
+    - JDK_VERSION="7u67-b01" JAVA_VERSION="1.7.0_67" DEFAULT_VERSION="false"
+    - JDK_VERSION="8u5-b13" JAVA_VERSION="1.8.0_05" DEFAULT_VERSION="true"
+
+before_install:
+  - sudo apt-get update -qq
+
+install:
+  - pip install ansible
+
+script:
+  - ansible-playbook -i localhost, tests/test.yml --syntax-check
+
+  - ansible-playbook -i localhost, tests/test.yml --connection=local
+
+  - >
+    ansible-playbook -i localhost, tests/test.yml --connection=local | 
+    grep -q 'changed=0.*failed=0' && 
+    (echo 'Idempotence test: pass' && exit 0) || (echo 'Idempotence test: fail' && exit 1)
+
+  - >
+    if [[ "${DEFAULT_VERSION}" == "true" ]]; then
+    test -h /usr/lib/jvm/java-${JDK_VERSION:0:1}-oracle ||
+    ( echo 'Symlink to default JDK does not exists' && exit 1)
+    fi
+
+  - >
+    if [[ "${DEFAULT_VERSION}" == "true" ]]; then
+    test "$( basename $( readlink /usr/lib/jvm/java-${JDK_VERSION:0:1}-oracle ) )" == "java-${JDK_VERSION:0:1}-oracle-${JDK_VERSION}" ||
+    ( echo 'Wrong symlink' && exit 1)
+    fi
+
+  - >
+    test "${DEFAULT_VERSION}" == "true" &&
+    export JAVA_BIN=/usr/bin/java ||
+    export JAVA_BIN=/usr/lib/jvm/java-${JDK_VERSION:0:1}-oracle-${JDK_VERSION}/jre/bin/java
+    
+  - >
+    test "$( ${JAVA_BIN} -version 2>&1 | sed -rn 's/java version "([0-9._]*)"/\1/p' )" == "${JAVA_VERSION}" ||
+    ( echo 'Version mismatch' && exit 1)

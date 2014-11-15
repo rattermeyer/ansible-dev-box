@@ -1,0 +1,5 @@
+- hosts: localhost
+  sudo: yes
+  roles:
+    - { role: ansible_oracle_jdk, oracle_jdk_version: '8u5-b13' }
+    - { role: ansible_oracle_jdk, oracle_jdk_version: '7u67-b01', oracle_jdk_not_default: false }

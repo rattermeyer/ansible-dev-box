@@ -1,0 +1,6 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+  - apt: name=git
+  - apt: name=git-flow
+  - apt: name=meld
+  - apt: name=jardiff
