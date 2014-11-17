@@ -1,8 +1,5 @@
 # vim: noai:ts=2:sw=2:expandtab
 ---
-- name: Install Java 1.7
-  apt: name=openjdk-7-jdk state=present
-
 - name: Install curl
   apt: name=curl state=present
 

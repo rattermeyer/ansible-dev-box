@@ -2,6 +2,9 @@
 ---
 # file dev
 - hosts: localhost
+  tasks:
+    - name: Create user
+      user: name={{ user }} password="$6$kewG32Frb1Ei/$f.0k8A0N9.04.jwd/ekddXWq56BBTG7V/jwSPgJeY8kfEAJNkqgErIn/knDpSDcm/gcvKnOBQcjdosNkyrO.t0"
   roles:
     - dev-tools
     - {role: wybczu.oracle_jdk, oracle_jdk_version: 8u20-b26 }
@@ -11,4 +14,9 @@
     - gvm
     - devbox.chrome
     - nvm
+    - angstwad.docker_ubuntu
 
+  vars:
+    oracle_jdk_version: 8u20-b26
+    user: richard
+    password: dMp7H.LtCccmU

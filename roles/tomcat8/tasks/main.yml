@@ -1,8 +1,5 @@
 # vim: noai:ts=2:sw=2:expandtab
 ---
-- name: Install Java 1.7
-  apt: name=openjdk-7-jdk state=present
-
 - name: Download Tomcat
   get_url: url=http://www.eu.apache.org/dist/tomcat/tomcat-8/v{{version}}/bin/apache-tomcat-{{version}}.tar.gz dest=/opt/apache-tomcat-{{version}}.tar.gz
 
