@@ -6,7 +6,7 @@ VAGRANTFILE_API_VERSION = "2"
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "devopsarchitect/ubuntu-trusty-docker-puppet-14.04"
+  config.vm.box = "box-cutter/ubuntu1404-desktop"
   config.vm.hostname = "ubuntu-trusty"
 
   # The url from where the 'config.vm.box' box will be fetched if it

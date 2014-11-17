@@ -1,0 +1,5 @@
+---
+- name: Install Fig
+  get_url: url=https://github.com/docker/fig/releases/download/{{ fig_version }}/linux
+           dest=/usr/local/bin/fig
+           mode=0755
