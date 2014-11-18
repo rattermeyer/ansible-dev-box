@@ -13,7 +13,7 @@
   command: /bin/tar xvf /opt/apache-maven-{{ maven_version }}.tar.gz -C /opt/apache-maven creates=/opt/apache-maven/apache-maven-{{ maven_version }}
 
 - name: Change ownership of Maven installation
-  file: path=/opt/apache-maven-{{ maven_version }} owner=dev group=dev state=directory recurse=yes
+  file: path=/opt/apache-maven-{{ maven_version }} owner={{ user }} group={{ user }} state=directory recurse=yes
 
 - name: Create symlink
   command: chdir=/opt/apache-maven ln -s apache-maven-{{ maven_version }} current

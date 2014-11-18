@@ -4,6 +4,6 @@
 - name: Install nvm
   shell: curl https://raw.githubusercontent.com/creationix/nvm/{{nvm_version}}/install.sh | bash
   args:
-    creates: /home/dev/.nvm
+    creates: /home/{{ user }}/.nvm
   sudo: yes
-  sudo_user: dev
+  sudo_user: {{ user }}

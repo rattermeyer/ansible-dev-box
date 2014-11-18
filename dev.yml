@@ -4,7 +4,7 @@
 - hosts: localhost
   tasks:
     - name: Create user
-      user: name={{ user }} password="$6$kewG32Frb1Ei/$f.0k8A0N9.04.jwd/ekddXWq56BBTG7V/jwSPgJeY8kfEAJNkqgErIn/knDpSDcm/gcvKnOBQcjdosNkyrO.t0"
+      user: name={{ user }} password="$6$kewG32Frb1Ei/$f.0k8A0N9.04.jwd/ekddXWq56BBTG7V/jwSPgJeY8kfEAJNkqgErIn/knDpSDcm/gcvKnOBQcjdosNkyrO.t0" state=present
   roles:
     - dev-tools
     - {role: wybczu.oracle_jdk, oracle_jdk_version: 8u20-b26 }
