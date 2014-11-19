@@ -70,10 +70,12 @@
     name: "{{ docker_io_pkg }}"
     state: latest
     update_cache: yes
+  environment: proxy_env
   when: "ansible_distribution_version == '14.04'"
       
 - name: Install Docker
   apt: pkg={{ docker_lxc_pkg }}
+  environment: proxy_env
   notify: "Start Docker"
   when: "ansible_distribution_version != '14.04'"  
 
@@ -134,6 +136,7 @@
 
 - name: Install Docker-py
   pip: name=docker-py   
+  environment: proxy_env
 
 - name: Check if /etc/updatedb.conf exists
   stat: path=/etc/updatedb.conf

@@ -3,13 +3,20 @@
 - name: Install curl
   apt: name=curl state=present
 
+- name: Download gvm
+  get_url: url=http://get.gvmtool.net dest=/home/{{ user }}/gvm-tool.sh owner={{ user }} group={{ user }}
+  environment: proxy_env
+
+- name: Change mode
+  file: path=/home/{{ user }}/gvm-tool.sh mode=0755
+
 - name: Install gvm
-  shell: curl -s get.gvmtool.net | bash
-  args: 
-    chdir: /home/dev
-    creates: /home/dev/.gvm
+  shell: /home/{{ user }}/gvm-tool.sh chdir=/home/{{user}} creates=/home/{{ user }}/.gvm
+  sudo: yes
+  sudo_user: "{{ user }}"
+  environment: proxy_env
 
 - name: Change ownership of gvm installation
-  file: path=/home/dev/.gvm owner=dev group=dev state=directory recurse=yes
+  file: path=/home/{{ user }}/.gvm owner={{ user }} group={{ user }} state=directory recurse=yes
 
 

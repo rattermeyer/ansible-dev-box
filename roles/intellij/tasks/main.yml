@@ -5,6 +5,7 @@
 
 - name: Download Intellij
   get_url: url=http://download-ln.jetbrains.com/idea/ideaIU-{{version}}.tar.gz dest=/opt/intellij-{{version}}.tar.gz
+  environment: proxy_env
 
 - name: Create intellij directory
   command: mkdir /opt/intellij creates=/opt/intellij
@@ -19,7 +20,7 @@
   command: chdir=/opt/intellij ln -s idea-IU-{{build}} current
 
 - name: Change ownership of IntelliJ installation
-  file: path=/opt/intellij owner=dev group=dev state=directory recurse=yes
+  file: path=/opt/intellij owner={{ user }} group={{ user }} state=directory recurse=yes
 
 - name: Copy unity desktop file
   template: src=intellij.j2 dest=/usr/share/applications/intellij.desktop
