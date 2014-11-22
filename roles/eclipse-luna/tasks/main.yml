@@ -3,9 +3,6 @@
 - name: Create eclipse directory
   file: path=/opt/eclipse state=directory owner={{user}} group={{user}}
 
-- name: Create eclipse luna directory
-  file: path=/opt/eclipse/eclipse-luna state=directory owner={{user}} group={{user}}
-
 - name: Download eclipse
   shell: wget -O /opt/eclipse/eclipse-luna.tar.gz "http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR1/eclipse-jee-luna-SR1-linux-gtk-x86_64.tar.gz&r=1"
   args:
@@ -17,14 +14,17 @@
 
 - name: Install eclipse
   unarchive: src=/opt/eclipse/eclipse-luna.tar.gz dest=/opt/eclipse
-  when: eclipse_archive_extracted_present is not defined or eclipse_archive_extracted_present.stat.isdir == false
+  when: eclipse_archive_extracted_present is defined and eclipse_archive_extracted_present.stat.exists == false
 
 - name: rename eclipse
   command: mv eclipse eclipse-luna
-  when: eclipse_archive_extracted_present is not defined or eclipse_archive_extracted_present.stat.isdir == false
+  when: eclipse_archive_extracted_present is defined and eclipse_archive_extracted_present.stat.exists == false
   args:
     chdir: /opt/eclipse
 
 - name: Reset ownership
   file: path=/opt/eclipse state=directory owner={{user}} group={{user}} recurse=true
   ignore_errors: yes
+
+- name: Copy unity desktop file
+  template: src=eclipse.j2 dest=/usr/share/applications/eclipse.desktop
