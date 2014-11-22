@@ -2,21 +2,24 @@
 This ansible roles allow to setup a development machine (ubuntu based).
 It install necessary tools for starting developing with
 
-* Java
-* JavaScript
-* Groovy
+* JavaEE development 
+
+# Installation
+
+* clone the repo
+* Customize dev.yml and Vagrantfile 
+** Especially user settings in dev.yml, and memory and CPU settings in Vagrantfile
 
 # Installed Components
 
 * git, git-flow
 * Diff / Merge Tool: meld
-* IntelliJ
-* Oracle JDK
+* Eclipse Luna
+* Oracle JDK 8
 * Apache Maven
-* gvm (managing grails, groovy, gradle etc installations)
-* nvm (managing node versions)
+* Google Chrome
 
-# Customization
+# After installation
 
-
-sudo ansible-playbook -i inventory dev.yml
+* Using the applicatio starter: search for eclipse and move icon to launcher
+* Adding the binaries (maven) to your path in .bashrc
