@@ -1,0 +1,15 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+- name: Create wildfly directory
+  file: path=/opt/wildfly state=directory owner={{user}} group={{user}}
+
+- name: Download Wildfly
+  get_url: url=http://download.jboss.org/wildfly/8.2.0.Final/wildfly-{{ version }}.tar.gz dest=/opt/wildfly/wildfly-{{ version }}.tar.gz owner={{ user }} group={{ user }}
+
+- name: Install wildfly
+  unarchive: src=/opt/wildfly/wildfly-{{version}}.tar.gz dest=/opt/wildfly owner={{user}} group={{user}}
+  args: 
+    creates: /opt/wildfly/wildfly-{{ version }}
+
+- name: Reset wildfly directory permissions
+  file: path=/opt/wildfly state=directory owner={{user}} group={{user}} recurse=yes

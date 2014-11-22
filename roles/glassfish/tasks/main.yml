@@ -1,0 +1,14 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+- name: Create Glassfish directory
+  file: path=/opt/glassfish state=directory owner={{user}} group={{user}} 
+
+- name: Download Glassfish
+  get_url: url=http://dlc.sun.com.edgesuite.net/glassfish/{{version}}/release/glassfish-{{version}}.zip dest=/opt/glassfish/glassfish-{{ version }}.zip owner={{ user }} group={{ user }}
+
+- name: Install Glassfish
+  unarchive: src=/opt/glassfish/glassfish-{{version}}.zip dest=/opt/glassfish owner={{user}} group={{user}}
+
+- name: Reset glassfish  directory permissions
+  file: path=/opt/glassfish state=directory owner={{user}} group={{user}} recurse=yes
+

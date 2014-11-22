@@ -1,0 +1,30 @@
+# vim: noai:ts=2:sw=2:expandtab
+---
+- name: Create eclipse directory
+  file: path=/opt/eclipse state=directory owner={{user}} group={{user}}
+
+- name: Create eclipse luna directory
+  file: path=/opt/eclipse/eclipse-luna state=directory owner={{user}} group={{user}}
+
+- name: Download eclipse
+  shell: wget -O /opt/eclipse/eclipse-luna.tar.gz "http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/luna/SR1/eclipse-jee-luna-SR1-linux-gtk-x86_64.tar.gz&r=1"
+  args:
+    creates: /opt/eclipse/eclipse-luna.tar.gz
+
+- name: Check if eclipse was installed
+  stat: path=/opt/eclipse/eclipse-luna
+  register: eclipse_archive_extracted_present
+
+- name: Install eclipse
+  unarchive: src=/opt/eclipse/eclipse-luna.tar.gz dest=/opt/eclipse
+  when: eclipse_archive_extracted_present is not defined or eclipse_archive_extracted_present.stat.isdir == false
+
+- name: rename eclipse
+  command: mv eclipse eclipse-luna
+  when: eclipse_archive_extracted_present is not defined or eclipse_archive_extracted_present.stat.isdir == false
+  args:
+    chdir: /opt/eclipse
+
+- name: Reset ownership
+  file: path=/opt/eclipse state=directory owner={{user}} group={{user}} recurse=true
+  ignore_errors: yes

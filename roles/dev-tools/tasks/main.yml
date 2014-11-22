@@ -5,3 +5,4 @@
   - apt: name=gitk
   - apt: name=meld
   - apt: name=jardiff
+  - apt: name=language-pack-de

@@ -8,17 +8,15 @@
   roles:
     - dev-tools
     - {role: wybczu.oracle_jdk, oracle_jdk_version: 8u20-b26 }
-    - {role: tomcat8, version: 8.0.14, oracle_jdk_not_default: true}
     - {role: maven, version: 3.2.3, oracle_jdk_not_default: true}
-    - {role: intellij, version: 13.1.3, build: 135.909, oracle_jdk_not_default: true}
-    - gvm
+    - {role: eclipse-luna }
+    - {role: wildfly, version: 8.2.0.Final }
+    - {role: glassfish, version: 4.1 }
+#    - {role: glassfish, version: "4.1" }
     - devbox.chrome
-    - nvm
-    - angstwad.docker_ubuntu
     - azavea.fig
 
   vars:
     oracle_jdk_version: 8u20-b26
     user: richard
     password: dMp7H.LtCccmU
-    oracle_jdk_not_default: true
