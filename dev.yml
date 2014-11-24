@@ -2,7 +2,7 @@
 ---
 # file dev
 - hosts: localhost
-  tasks:
+  pre_tasks:
     - name: Create user
       user: name={{ user }} password="$6$kewG32Frb1Ei/$f.0k8A0N9.04.jwd/ekddXWq56BBTG7V/jwSPgJeY8kfEAJNkqgErIn/knDpSDcm/gcvKnOBQcjdosNkyrO.t0" state=present
   roles:
@@ -21,7 +21,6 @@
     oracle_jdk_version: 8u20-b26
     user: richard
     password: dMp7H.LtCccmU
-    oracle_jdk_not_default: true
     proxy_env:
-      http_proxy: http://proxy.muenster.de.root.net:8080
-      https_proxy: http://proxy.muenster.de.root.net:8080
+      http_proxy: XXX
+      https_proxy: XXX
