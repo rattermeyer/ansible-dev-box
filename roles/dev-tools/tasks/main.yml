@@ -6,3 +6,9 @@
   - apt: name=meld
   - apt: name=jardiff
   - apt: name=language-pack-de
+  - apt: name=vim
+  - apt: name=vim-addon-manager
+  - apt: name=vim-python-jedi
+  - apt: name=vim-syntax-docker
+  - apt: name=vim-youcompleteme
+  - apt: name=emacs
