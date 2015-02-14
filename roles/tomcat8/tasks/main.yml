@@ -16,6 +16,6 @@
   command: chdir=/opt/apache-tomcat ln -s apache-tomcat-{{version}} current
 
 - name: Change ownership of Tomcat installation
-  file: path=/opt/apache-tomcat owner={{user}} group={{user}} state=directory recurse=yes
+  file: path=/opt/apache-tomcat owner={{ user }} group={{ user }} state=directory recurse=yes
 
   

@@ -6,10 +6,10 @@
 - name: Install gvm
   shell: curl -s get.gvmtool.net | bash
   args: 
-    chdir: "/home/{{ user }}"
-    creates: "/home/{{ user }}/.gvm"
+    chdir: /home/{{ user }}
+    creates: /home/{{ user }}/.gvm
 
 - name: Change ownership of gvm installation
-  file: path="/home/{{user}}/.gvm" owner={{user}} group={{user}} state=directory recurse=yes
+  file: path=/home/{{ user }}/.gvm owner={{ user }} group={{ user }} state=directory recurse=yes
 
 

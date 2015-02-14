@@ -1,14 +1,9 @@
 ---
 # tasks file for nvm
 # vim: noai:ts=2:sw=2:expandtab
-- name: Download nvm Script
-  get_url: url=https://raw.githubusercontent.com/creationix/nvm/{{nvm_version}}/install.sh dest=/home/{{user}}/Downloads/nvm-install.sh mode=0755
-  register: nvminstall
-  sudo: yes
-  sudo_user: "{{ user }}"
-
 - name: Install nvm
-  command: /home/{{user}}/Downloads/nvm-install.sh
-  when: nvminstall|changed
+  shell: curl https://raw.githubusercontent.com/creationix/nvm/{{nvm_version}}/install.sh | bash
+  args:
+    creates: /home/{{ user }}/.nvm
   sudo: yes
-  sudo_user: "{{ user }}"
+  sudo_user: {{ user }}
